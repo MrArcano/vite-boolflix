@@ -26,7 +26,10 @@ export default {
 <style lang="scss" scoped>
   header{
     background-color: #000000;
-    padding: 8px 0;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
     .container{
       display: flex;
       align-items: center;
