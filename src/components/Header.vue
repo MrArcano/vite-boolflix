@@ -1,6 +1,12 @@
 <script>
+import { store } from '../data/store';
 export default {
-  name: "Header"
+  name: "Header",
+  data() {
+    return {
+      store
+    }
+  },
 }
 </script>
 
@@ -11,8 +17,8 @@ export default {
         <img src="/logo-boolflix.png" alt="logo-boolflix">
       </div>
       <div class="search">
-        <input type="text" class="form-control" id="inputCity">
-        <select id="inputState" class="form-select">
+        <input type="text" v-model="store.query" @keyup.enter="$emit('startSearch')"  class="form-control">
+        <select class="form-select">
           <option selected>All</option>
           <option>Film</option>
           <option>Serie</option>

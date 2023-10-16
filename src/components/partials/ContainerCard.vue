@@ -20,7 +20,7 @@ export default {
   <div class="container">
     <h1>Film</h1>
     <div class="div">
-      <Card v-for="(card , index) in store.apiResponse.results" :key="'card_'+index" :cardObj="card" />
+      <Card v-for="(card , index) in store.apiResponseMovie.results" :key="'card_'+index" :cardObj="card" />
     </div>
   </div>
 </template>
