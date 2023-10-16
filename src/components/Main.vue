@@ -1,17 +1,25 @@
 <script>
 import ContainerCard from './partials/ContainerCard.vue';
+import { store } from '../data/store';
 
 export default {
   name: "Main",
   components:{
     ContainerCard
-  }
+  },
+  data() {
+    return {
+      store
+    }
+  },
 }
+
 </script>
 
 <template>
   <main>
-    <ContainerCard />
+    <ContainerCard v-if="store.typeFlag !== 'Serie'" :ObjList="store.apiResponse.movie" :title="'Film'" />
+    <ContainerCard v-if="store.typeFlag !== 'Film'" :ObjList="store.apiResponse.tv" :title="'Serie TV'"/>
   </main>
 </template>
 

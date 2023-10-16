@@ -18,8 +18,8 @@ export default {
       </div>
       <div class="search">
         <input type="text" v-model="store.query" @keyup.enter="$emit('startSearch')"  class="form-control">
-        <select class="form-select">
-          <option selected>All</option>
+        <select v-model="store.typeFlag" class="form-select">
+          <option>All</option>
           <option>Film</option>
           <option>Serie</option>
         </select>

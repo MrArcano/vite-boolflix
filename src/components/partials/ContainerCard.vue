@@ -8,19 +8,25 @@ export default {
   components:{
     Card
   },
+  props:{
+    ObjList: Object,
+    title: String
+  },
   data() {
     return {
       store
     }
   },
 }
+
+// console.log(ObjList);
 </script>
 
 <template>
   <div class="container">
-    <h1>Film</h1>
+    <h1>{{ title }}</h1>
     <div class="div">
-      <Card v-for="(card , index) in store.apiResponseMovie.results" :key="'card_'+index" :cardObj="card" />
+      <Card v-for="(card , index) in ObjList.results" :key="'card_'+index" :cardObj="card" />
     </div>
   </div>
 </template>

@@ -19,8 +19,8 @@ export default {
   },
   methods: {
     getAPI(apiUrl){
-      console.log(store.query);
-      console.log("API");
+      let cmovie = 0;
+      let ctv = 0;
       axios.get(apiUrl,{
         params:{
           api_key: store.apiKey,
@@ -29,17 +29,14 @@ export default {
         }
       })
       .then((response) => {
-        console.log(response.data);
-        if(apiUrl.includes("movie")){
-          console.log("movie");
-          store.apiResponseMovie = response.data;
+        if(apiUrl.includes("/movie")){
+          store.apiResponse.movie = response.data;
+          console.log(store.apiResponse.movie);
         }
-        if(apiUrl.includes("tv")){
-          console.log("tv");
-          store.apiResponseTv = response.data;
+        if(apiUrl.includes("/tv")){
+          store.apiResponse.tv = response.data
+          console.log(store.apiResponse.tv);
         }
-        console.log(store.apiResponseMovie);
-        console.log(store.apiResponseTv);
       })
       .catch((error) => {
         console.log(error);
@@ -54,7 +51,7 @@ export default {
 </script>
 
 <template>
-  <Header @startSearch="console.log('EMIT'); getAPI(store.apiUrlMovie)" />
+  <Header @startSearch="getAPI(store.apiUrlMovie); this.getAPI(store.apiUrlTv);" />
   <Main />
 </template>
 

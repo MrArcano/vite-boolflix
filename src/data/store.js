@@ -7,6 +7,9 @@ export const store = reactive({
   apiKey: "8c3144caf08ff7ccb880d95e80b23236",
   language: "it_IT",
   query:"one piece",
-  apiResponseTv: {},
-  apiResponseMovie: {}
+  apiResponse:{
+    movie: {},
+    tv: {}
+  },
+  typeFlag: "All",
 })
