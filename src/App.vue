@@ -39,7 +39,6 @@ export default {
   },
   mounted() {
     this.getAPI(store.apiUrlMovie);
-    this.getAPI(store.apiUrlTv);
   },
 }
 </script>

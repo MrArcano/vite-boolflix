@@ -1,12 +1,17 @@
 <script>
+import ContainerCard from './partials/ContainerCard.vue';
+
 export default {
-  name: "Main"
+  name: "Main",
+  components:{
+    ContainerCard
+  }
 }
 </script>
 
 <template>
   <main>
-    MAIN
+    <ContainerCard />
   </main>
 </template>
 
@@ -15,5 +20,6 @@ export default {
     height: calc(100vh - 60px);
     background-color: #181818;
     color: white;
+    overflow-y: auto;
   }
 </style>
