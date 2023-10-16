@@ -18,7 +18,7 @@ export default {
 
 <template>
   <main>
-    <div v-if="store.apiResponse.movie.total_results != 0">
+    <div v-if="store.apiResponse.movie">
       <ContainerCard v-if="store.typeFlag !== 'Serie'" :ObjList="store.apiResponse.movie" :title="'Film'" />
       <ContainerCard v-if="store.typeFlag !== 'Film'" :ObjList="store.apiResponse.tv" :title="'Serie TV'"/>
     </div>

@@ -18,8 +18,8 @@ export default {
     }
   },
   methods: {
-    getAPI(apiUrl){
-      axios.get(apiUrl,{
+    getAPI(apiUrl, key){
+      axios.get(apiUrl + key,{
         params:{
           api_key: store.apiKey,
           language: store.language,
@@ -27,14 +27,8 @@ export default {
         }
       })
       .then((response) => {
-        if(apiUrl.includes("/movie")){
-          store.apiResponse.movie = response.data;
-          console.log(store.apiResponse.movie);
-        }
-        if(apiUrl.includes("/tv")){
-          store.apiResponse.tv = response.data
-          console.log(store.apiResponse.tv);
-        }
+        store.apiResponse[key] = response.data;
+        console.log(key, store.apiResponse[key]);
       })
       .catch((error) => {
         console.log(error);
@@ -42,14 +36,14 @@ export default {
     }
   },
   mounted() {
-    this.getAPI(store.apiUrlMovie);
-    this.getAPI(store.apiUrlTv);
+    // this.getAPI(store.apiUrl , "movie");
+    // this.getAPI(store.apiUrl, "tv");
   },
 }
 </script>
 
 <template>
-  <Header @startSearch="getAPI(store.apiUrlMovie); this.getAPI(store.apiUrlTv);" />
+  <Header @startSearch="getAPI(store.apiUrl , 'movie'); this.getAPI(store.apiUrl , 'tv');" />
   <Main />
 </template>
 
