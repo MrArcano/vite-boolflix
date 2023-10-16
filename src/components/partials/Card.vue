@@ -1,6 +1,11 @@
 <script>
+import Vote from './Vote.vue';
+
 export default {
   name: "Card",
+  components:{
+    Vote
+  },
   props:{
     cardObj: Object,
   },
@@ -42,6 +47,7 @@ export default {
       <p v-else>original_language	:	{{ cardObj.original_language }}</p>
 
       <p>vote_average	:	{{ cardObj.vote_average }}</p>
+      <Vote :vote="cardObj.vote_average" :cardID="cardObj.id" />
     </div>
   </div>
 </template>
@@ -49,7 +55,7 @@ export default {
 <style lang="scss" scoped>
 .card-csm{
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
 
   .poster{
     width: 200px;

@@ -18,12 +18,16 @@ export default {
 
 <template>
   <main>
-    <div v-if="store.apiResponse.movie">
-      <ContainerCard v-if="store.typeFlag !== 'Serie'" :ObjList="store.apiResponse.movie" :title="'Film'" />
-      <ContainerCard v-if="store.typeFlag !== 'Film'" :ObjList="store.apiResponse.tv" :title="'Serie TV'"/>
-    </div>
-    <div v-else class="not-found">
-      <p>Not Found!</p>
+    <div v-if="store.apiResponse.movie && store.apiResponse.tv">
+
+      <div v-if="store.apiResponse.movie.total_results === 0 && store.apiResponse.tv.total_results === 0" class="not-found">
+        <p>Not Found!</p>
+      </div>
+      <div v-else>
+        <ContainerCard v-if="store.typeFlag !== 'Serie'" :ObjList="store.apiResponse.movie" :title="'Film'" />
+        <ContainerCard v-if="store.typeFlag !== 'Film'" :ObjList="store.apiResponse.tv" :title="'Serie TV'"/>
+      </div>
+
     </div>
   </main>
 </template>
@@ -34,12 +38,15 @@ export default {
     background-color: #181818;
     color: white;
     overflow-y: auto;
-    .not-found{
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    >div{
       height: 100%;
-      font-size: 2rem;
+      .not-found{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 2rem;
+      }
     }
   }
 </style>

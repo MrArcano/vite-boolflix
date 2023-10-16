@@ -36,8 +36,8 @@ export default {
     }
   },
   mounted() {
-    // this.getAPI(store.apiUrl , "movie");
-    // this.getAPI(store.apiUrl, "tv");
+    this.getAPI(store.apiUrl , "movie");
+    this.getAPI(store.apiUrl, "tv");
   },
 }
 </script>
