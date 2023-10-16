@@ -6,7 +6,7 @@ export const store = reactive({
   apiUrlMovie: "https://api.themoviedb.org/3/search/movie",
   apiKey: "8c3144caf08ff7ccb880d95e80b23236",
   language: "it_IT",
-  query:"one piece",
+  query:"",
   apiResponse:{
     movie: {},
     tv: {}

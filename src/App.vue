@@ -19,8 +19,6 @@ export default {
   },
   methods: {
     getAPI(apiUrl){
-      let cmovie = 0;
-      let ctv = 0;
       axios.get(apiUrl,{
         params:{
           api_key: store.apiKey,
