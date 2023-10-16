@@ -1,1 +1,10 @@
-@import "/node_modules/bootstrap/scss/bootstrap.scss"
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+@import '@fontsource/bebas-neue';
+
+body {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+img{
+  max-width: 100%;
+}
