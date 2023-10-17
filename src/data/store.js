@@ -11,3 +11,5 @@ export const store = reactive({
   },
   typeFlag: "All",
 })
+
+// https://api.themoviedb.org/3/trending/all/day?language=it-IT&api_key=8c3144caf08ff7ccb880d95e80b23236

@@ -18,8 +18,8 @@ export default {
     }
   },
   methods: {
-    getAPI(apiUrl, key){
-      axios.get(apiUrl + key,{
+    getAPI(key){
+      axios.get(store.apiUrl + key,{
         params:{
           api_key: store.apiKey,
           language: store.language,
@@ -36,14 +36,14 @@ export default {
     }
   },
   mounted() {
-    this.getAPI(store.apiUrl , "movie");
-    this.getAPI(store.apiUrl, "tv");
+    this.getAPI("movie");
+    this.getAPI("tv");
   },
 }
 </script>
 
 <template>
-  <Header @startSearch="getAPI(store.apiUrl , 'movie'); this.getAPI(store.apiUrl , 'tv');" />
+  <Header @startSearch="getAPI('movie'); this.getAPI('tv');" />
   <Main />
 </template>
 

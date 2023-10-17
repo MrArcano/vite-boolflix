@@ -25,7 +25,7 @@ export default {
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
-    <div class="div">
+    <div>
       <Card v-for="(card , index) in ObjList.results" :key="'card_'+index" :cardObj="card" />
     </div>
   </div>
@@ -34,6 +34,7 @@ export default {
 <style lang="scss" scoped>
 .container{
   padding: 16px;
+
   div{
     display: flex;
     flex-wrap: wrap;

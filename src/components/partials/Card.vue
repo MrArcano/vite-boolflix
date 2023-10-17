@@ -32,21 +32,23 @@ export default {
 <template>
   <div class="card-csm">
     <div class="poster">
-      <img v-if="cardObj.poster_path" :src="`https://image.tmdb.org/t/p/w200${cardObj.poster_path}`" alt="">
+      <img v-if="cardObj.poster_path" :src="`https://image.tmdb.org/t/p/w300${cardObj.poster_path}`" alt="">
       <img v-else src="/image-not-found-scaled-1150x647.png" alt="image-not-found">
     </div>
     <div class="hover-csm">
 
-      <p v-if="cardObj.title">title	:	{{ cardObj.title }}</p>
-      <p v-else>name	:	{{ cardObj.name }}</p>
+      <p>{{ cardObj.title || cardObj.name }}</p>
+      
+      <p>{{ cardObj.original_title || cardObj.original_name }}</p>
 
-      <p v-if="cardObj.original_title">original_title	:	{{ cardObj.original_title }}</p>
-      <p v-else>original_name	:	{{ cardObj.original_name }}</p>
+      <p>
+        <span>original language	:	</span>
+        <img class="flag" v-if="existImage(cardObj.original_language)" :src="urlFlag" :alt="cardObj.original_language">
+        <span v-else>{{ cardObj.original_language }}</span>
+      </p>
+      
 
-      <img class="flag" v-if="existImage(cardObj.original_language)" :src="urlFlag" :alt="cardObj.original_language">
-      <p v-else>original_language	:	{{ cardObj.original_language }}</p>
-
-      <p>vote_average	:	{{ cardObj.vote_average }}</p>
+      <p>vote_average	:	{{ cardObj.vote_average / 2 }}</p>
       <Vote :vote="cardObj.vote_average" :cardID="cardObj.id" />
     </div>
   </div>
@@ -55,34 +57,36 @@ export default {
 <style lang="scss" scoped>
 .card-csm{
   position: relative;
-  // overflow: hidden;
+  overflow: hidden;
+  cursor: pointer;
+
+  width: 220px;
+
+  &:hover .hover-csm{
+      transform: translateY(0);
+    }
 
   .poster{
-    width: 200px;
     img{
       object-fit: cover;
       aspect-ratio: 2/3;
     }
   }
   .hover-csm{
-    cursor: pointer;
-    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.5s ease-in 0s;
+
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
 
     padding: 16px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-
-    &:hover{
-      opacity: 1;
-    }
 
     .flag{
       height: 20px;

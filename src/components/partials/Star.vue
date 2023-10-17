@@ -6,9 +6,6 @@ export default {
     nstar: Number,
     cardID: Number
   },
-  mounted() {
-    console.log(this.nstar +" - " +this.percStar);
-  },
 }
 </script>
 

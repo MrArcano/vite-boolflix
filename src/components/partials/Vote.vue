@@ -12,7 +12,6 @@ export default {
   methods: {
     perc(num){
       let perc = (this.vote / 10) * 5;
-      console.log(perc);
       let output = 0;
       if (perc >= num){
         output = 100;
