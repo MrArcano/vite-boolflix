@@ -9,8 +9,8 @@ export default {
     Card
   },
   props:{
-    ObjList: Object,
-    title: String
+    title: String,
+    type: String
   },
   data() {
     return {
@@ -18,15 +18,13 @@ export default {
     }
   },
 }
-
-// console.log(ObjList);
 </script>
 
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
     <div>
-      <Card v-for="(card , index) in ObjList.results" :key="'card_'+index" :cardObj="card" />
+      <Card v-for="card in store.apiResponse[type].results" :key="card.id" :cardObj="card" />
     </div>
   </div>
 </template>

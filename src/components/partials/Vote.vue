@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     perc(num){
-      let perc = (this.vote / 10) * 5;
+      let perc = this.vote / 2;
       let output = 0;
       if (perc >= num){
         output = 100;

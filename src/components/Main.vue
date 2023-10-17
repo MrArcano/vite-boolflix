@@ -24,8 +24,8 @@ export default {
         <p>Not Found!</p>
       </div>
       <div v-else>
-        <ContainerCard v-if="store.typeFlag !== 'Serie'" :ObjList="store.apiResponse.movie" :title="'Film'" />
-        <ContainerCard v-if="store.typeFlag !== 'Film'" :ObjList="store.apiResponse.tv" :title="'Serie TV'"/>
+        <ContainerCard v-if="store.typeFlag !== 'Serie'" title="Film" type="movie" />
+        <ContainerCard v-if="store.typeFlag !== 'Film'" title="Serie TV" type="tv"/>
       </div>
 
     </div>
