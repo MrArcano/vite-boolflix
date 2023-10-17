@@ -40,13 +40,6 @@ export default {
     overflow-y: auto;
     >div{
       height: 100%;
-      .not-found{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        font-size: 2rem;
-      }
     }
   }
 </style>

@@ -23,7 +23,10 @@ export default {
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
-    <div>
+    <div v-if="store.apiResponse[type].total_results === 0" class="not-found">
+        <p>Not Found!</p>
+    </div>
+    <div v-else>
       <Card v-for="card in store.apiResponse[type].results" :key="card.id" :cardObj="card" />
     </div>
   </div>
