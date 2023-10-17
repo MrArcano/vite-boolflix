@@ -25,12 +25,11 @@ export default {
     </div>
     <div class="hover-csm">
 
-      <p>{{ cardObj.title || cardObj.name }}</p>
-      
+      <p v-if="cardObj.title !== cardObj.original_title || cardObj.name !== cardObj.original_name">{{ cardObj.title || cardObj.name }}</p>
       <p>{{ cardObj.original_title || cardObj.original_name }}</p>
 
       <p>
-        <span>original language	:	</span>
+        <span>language	:	</span>
 
         <img
           class="flag"
@@ -42,7 +41,7 @@ export default {
       </p>
       
 
-      <p>vote_average	:	{{ cardObj.vote_average / 2 }}</p>
+      <p>vote_average	:	{{ (cardObj.vote_average / 2).toFixed(2) }}</p>
       <Vote :vote="cardObj.vote_average" :cardID="cardObj.id" />
     </div>
   </div>
@@ -51,10 +50,7 @@ export default {
 <style lang="scss" scoped>
 .card-csm{
   position: relative;
-  overflow: hidden;
   cursor: pointer;
-
-  width: 220px;
 
   &:hover .hover-csm{
       transform: translateY(0);
@@ -68,7 +64,7 @@ export default {
   }
   .hover-csm{
     transform: translateY(100%);
-    transition: all 0.5s ease-in 0s;
+    transition: transform 0.5s ease-in 0s;
 
     position: absolute;
     top: 0;
@@ -80,12 +76,18 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+
+    p{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .flag{
-      height: 20px;
+      height: 15px;
       border-radius: 2px;
     }
+
   }
 }
 </style>
