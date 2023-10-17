@@ -11,19 +11,7 @@ export default {
   },
   data() {
     return {
-      urlFlag: "",
-    }
-  },
-  methods: {
-    existImage(lang){
-      if(lang === "en"){
-        this.urlFlag = "/flag/en.png";
-        return true;
-      }
-      if(lang === "it"){
-        this.urlFlag = "/flag/it.png";
-        return true;
-      }
+      arrayFlag:["en","it"],
     }
   },
 }
@@ -43,7 +31,13 @@ export default {
 
       <p>
         <span>original language	:	</span>
-        <img class="flag" v-if="existImage(cardObj.original_language)" :src="urlFlag" :alt="cardObj.original_language">
+
+        <img
+          class="flag"
+          v-if="arrayFlag.includes(cardObj.original_language)"
+          :src="'/flag/'+cardObj.original_language+'.png'"
+          :alt="cardObj.original_language">
+
         <span v-else>{{ cardObj.original_language }}</span>
       </p>
       
