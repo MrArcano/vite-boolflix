@@ -51,11 +51,18 @@ export default {
       .catch((error) => {
         console.log(error);
       })
+    },
+
+    Search(){
+      // reset genre selected
+      store.selectedGenre.movie = 0,
+      store.selectedGenre.tv = 0,
+      this.getAPI("movie");
+      this.getAPI("tv");
     }
   },
   mounted() {
-    this.getAPI("movie");
-    this.getAPI("tv");
+    this.Search();
 
     this.getAPIgenre("movie");
     this.getAPIgenre("tv");
@@ -64,7 +71,7 @@ export default {
 </script>
 
 <template>
-  <Header @startSearch="getAPI('movie'); this.getAPI('tv');" />
+  <Header @startSearch="Search()" />
   <Main />
 </template>
 

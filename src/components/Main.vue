@@ -24,11 +24,14 @@ export default {
         <p>Not Found!</p>
       </div>
       <div v-else>
-        <ContainerCard v-if="store.typeFlag !== 'Serie'" title="Film" type="movie" />
-        <ContainerCard v-if="store.typeFlag !== 'Film'" title="Serie TV" type="tv"/>
+
+        <ContainerCard v-if="store.typeFlag !== 'Serie' && store.apiResponse.movie.total_results > 0" title="Film" type="movie" />
+
+        <ContainerCard v-if="store.typeFlag !== 'Film' && store.apiResponse.tv.total_results > 0" title="Serie TV" type="tv"/>
       </div>
 
     </div>
+
   </main>
 </template>
 

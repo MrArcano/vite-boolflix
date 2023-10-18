@@ -22,16 +22,9 @@ export const store = reactive({
 
 // API Trending ALL
 // https://api.themoviedb.org/3/trending/all/day?language=it-IT&api_key=8c3144caf08ff7ccb880d95e80b23236
-
-// API Movie genre
-// https://api.themoviedb.org/3/genre/movie/list?'
 /*
 params:{
   language=it
   apiKey: "8c3144caf08ff7ccb880d95e80b23236"
 }
 */
-// API Tv genre
-// https://api.themoviedb.org/3/genre/tv/list?language=it'
-
-// genre_ids

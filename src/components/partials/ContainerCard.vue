@@ -1,5 +1,4 @@
 <script>
-
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 // Import Swiper styles
@@ -30,12 +29,6 @@ export default {
   },
   methods: {
     getArrayCard(){
-      // Array Base
-      // store.apiResponse[type].results
-
-      // Genere selezionato
-      // store.selectedGenre[type]
-
       let newArray = []
       if (store.selectedGenre[this.type] == 0){
         newArray = store.apiResponse[this.type].results;
@@ -58,28 +51,27 @@ export default {
 <template>
   <div class="container">
     <div class="filter">
-      <h1>{{ title + store.selectedGenre[type] }}</h1>
+      <h1>{{ title }}</h1>
       <select v-if="store.apiGenre[type]" v-model="store.selectedGenre[type]" class="form-select">
         <option value="0">Genere</option>
         <option v-for="genre in store.apiGenre[type].genres" :key="genre.id" :value="genre.id">{{ genre.name }}</option>
       </select>
     </div>
-    
-    <div v-if="store.apiResponse[type].total_results === 0" class="not-found">
-        <p>Not Found!</p>
-    </div>
-    <div class="container-swipe" v-else>
+
+    <div class="container-swipe">
 
       <swiper
         :slidesPerView="5"
         :spaceBetween="30"
         :navigation="true"
+        :loop="true"
+        :grabCursor="true"
         :centeredSlides="false"
         :modules="modules"
         class="mySwiper"
       >
         <swiper-slide v-for="card in getArrayCard()" :key="card.id">
-          <Card :cardObj="card" />
+          <Card :cardObj="card" :type="type"/>
         </swiper-slide>
 
       </swiper>
@@ -122,8 +114,8 @@ export default {
     .swiper-button-next::after,
     .swiper-button-prev::after{
       font-size: 24px;
-        font-weight: bold;
-        color: #db202c;
+      font-weight: bold;
+      color: #db202c;
     }
   }
 

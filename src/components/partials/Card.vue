@@ -1,5 +1,7 @@
 <script>
+import axios from 'axios';
 import Vote from './Vote.vue';
+import { store } from '../../data/store';
 
 export default {
   name: "Card",
@@ -8,11 +10,37 @@ export default {
   },
   props:{
     cardObj: Object,
+    type: String
   },
   data() {
     return {
+      store,
       arrayFlag:["en","it"],
+      castArray: [],
     }
+  },
+  methods: {
+    // Get API actor cast
+    getAPIcast(key){
+      axios.get(store.apiUrl + key + "/" + this.cardObj.id + "/credits",{
+        params:{
+          api_key: store.apiKey,
+          language: store.language,
+        }
+      })
+      .then((response) => {
+        this.castArray = response.data.cast;
+        if(this.castArray.length > 5){
+          this.castArray.length = 5;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+  },
+  mounted() {
+    this.getAPIcast(this.type);
   },
 }
 </script>
@@ -25,8 +53,10 @@ export default {
     </div>
     <div class="hover-csm">
 
-      <p v-if="cardObj.title !== cardObj.original_title || cardObj.name !== cardObj.original_name">{{ cardObj.title || cardObj.name }}</p>
-      <p>{{ cardObj.original_title || cardObj.original_name }}</p>
+      <p>{{ cardObj.id }}</p>
+
+      <p class="ellipsis" v-if="cardObj.title !== cardObj.original_title || cardObj.name !== cardObj.original_name">{{ cardObj.title || cardObj.name }}</p>
+      <p class="ellipsis">{{ cardObj.original_title || cardObj.original_name }}</p>
 
       <p>
         <span>language : </span>
@@ -42,6 +72,14 @@ export default {
       
       <p>vote_average	:	{{ (cardObj.vote_average / 2).toFixed(2) }}</p>
       <Vote :vote="cardObj.vote_average" :cardID="cardObj.id" />
+
+      <h5 class="text-center mt-3">Description</h5>
+      <p class="description">
+        {{ cardObj.overview }}
+        <ul>
+          <li v-for="cast in castArray" :key="cast.id">{{ cast.name }}</li>
+        </ul>
+      </p>
     </div>
   </div>
 </template>
@@ -49,7 +87,7 @@ export default {
 <style lang="scss" scoped>
 .card-csm{
   position: relative;
-  cursor: pointer;
+  font-size: 0.8rem;
 
   &:hover .hover-csm{
       transform: translateY(0);
@@ -74,13 +112,40 @@ export default {
     padding: 16px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
     p{
+      margin: 0;
+    }
+
+    .ellipsis{
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      flex-shrink: 0;
     }
+
+    .description{
+      overflow-y: auto;
+      scrollbar-width: thin;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      overscroll-behavior: auto none;
+
+      // Google scrollbar
+      &::-webkit-scrollbar{
+        width: 6px;
+      }
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888; 
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+      }
+    }
+
 
     .flag{
       height: 15px;
