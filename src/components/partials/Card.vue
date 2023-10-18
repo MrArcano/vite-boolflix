@@ -29,7 +29,7 @@ export default {
       <p>{{ cardObj.original_title || cardObj.original_name }}</p>
 
       <p>
-        <span>language	:	</span>
+        <span>language : </span>
 
         <img
           class="flag"
@@ -40,7 +40,6 @@ export default {
         <span v-else>{{ cardObj.original_language }}</span>
       </p>
       
-
       <p>vote_average	:	{{ (cardObj.vote_average / 2).toFixed(2) }}</p>
       <Vote :vote="cardObj.vote_average" :cardID="cardObj.id" />
     </div>

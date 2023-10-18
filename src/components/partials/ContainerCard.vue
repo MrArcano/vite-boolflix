@@ -28,6 +28,25 @@ export default {
       store
     }
   },
+  methods: {
+    getArrayCard(){
+      // Array Base
+      // store.apiResponse[type].results
+
+      // Genere selezionato
+      // store.selectedGenre[type]
+
+      let newArray = []
+      if (store.selectedGenre[this.type] == 0){
+        newArray = store.apiResponse[this.type].results;
+      }else{
+        newArray = store.apiResponse[this.type].results.filter((cardt)=>{ 
+          return cardt.genre_ids.includes(store.selectedGenre[this.type])
+        })
+      }
+      return newArray;
+    }
+  },
   setup() {
     return {
       modules: [Navigation, Mousewheel, Keyboard],
@@ -38,7 +57,14 @@ export default {
 
 <template>
   <div class="container">
-    <h1>{{ title }}</h1>
+    <div class="filter">
+      <h1>{{ title + store.selectedGenre[type] }}</h1>
+      <select v-if="store.apiGenre[type]" v-model="store.selectedGenre[type]" class="form-select">
+        <option value="0">Genere</option>
+        <option v-for="genre in store.apiGenre[type].genres" :key="genre.id" :value="genre.id">{{ genre.name }}</option>
+      </select>
+    </div>
+    
     <div v-if="store.apiResponse[type].total_results === 0" class="not-found">
         <p>Not Found!</p>
     </div>
@@ -52,7 +78,7 @@ export default {
         :modules="modules"
         class="mySwiper"
       >
-        <swiper-slide v-for="card in store.apiResponse[type].results" :key="card.id">
+        <swiper-slide v-for="card in getArrayCard()" :key="card.id">
           <Card :cardObj="card" />
         </swiper-slide>
 
@@ -65,6 +91,19 @@ export default {
 <style lang="scss">
 .container{
   padding: 16px;
+  .filter{
+    height: 48px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h1{
+      margin: 0;
+    }
+    select{
+      width: 30%;
+    }
+  }
 }
 .container-swipe{
     overflow: hidden;
